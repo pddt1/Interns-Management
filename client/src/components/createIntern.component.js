@@ -37,7 +37,6 @@ export default function CreateIntern(props) {
         [name]: name === "result" ? !preValue.result : value,
       };
     });
-    console.log(intern);
   }
   function handleSubmit(e) {
     const form = e.currentTarget;

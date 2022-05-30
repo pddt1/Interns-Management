@@ -11,7 +11,6 @@ function Home() {
   useEffect(() => {
     UserService.retriveAllIntern().then(
       (res) => {
-        console.log(res.data.data);
         setInterns(res.data.data);
       },
       (err) => {
@@ -27,22 +26,21 @@ function Home() {
     setIsOpen(false);
   }
   function addIntern(newIntern) {
-    console.log("newIntern");
-    console.log(newIntern);
     setInterns((preInterns) => [...preInterns, newIntern]);
   }
   function deleteIntern(id) {
-    UserService.deleteIntern(id).then(res=>{
+    UserService.deleteIntern(id).then(
+      (res) => {
         setInterns((preInterns) => {
-            return preInterns.filter((intern) => {
-              // console.log(noteItem._id+ ' '+id);
-              return intern._id !== id;
-            });
-          })
-    },err=>{
+          return preInterns.filter((intern) => {
+            return intern._id !== id;
+          });
+        });
+      },
+      (err) => {
         alert(err.message);
-    })
-    
+      }
+    );
   }
   // function internPage(){
   //     let path='/intern/'

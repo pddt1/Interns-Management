@@ -11,11 +11,11 @@ module.exports = function(app) {
     next();
   });
   // app.post("/api/post", [authJwt.verifyToken], controller.addNote);
-  app.get("/api/retrive",[authJwt.verifyToken], controller.retriveInterns);
+  app.get("/api/intern",[authJwt.verifyToken], controller.retriveInterns);
   app.get("/api/user/:id",[authJwt.verifyToken], controller.retriveUser);
   app.get("/api/intern/:id",[authJwt.verifyToken], controller.retriveIntern);
   app.delete("/api/intern/:id",[authJwt.verifyToken], controller.deleteIntern);
-  app.post("/api/post", [authJwt.verifyToken,upload.single("cv")],controller.addIntern);
+  app.post("/api/intern", [authJwt.verifyToken,upload.single("cv")],controller.addIntern);
   app.patch("/api/intern/:id",[authJwt.verifyToken,upload.single("cv")],controller.updateIntern);
   app.put("/api/user/:id",[authJwt.verifyToken],controller.updateUser);
 };

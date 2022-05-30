@@ -4,28 +4,24 @@ import UserService from "../services/user.service";
 import EditButton from "./editbutton.component";
 export default function InternInformation() {
   const { id } = useParams();
-  const [editable,setEditable]=useState(false);
+  const [editable, setEditable] = useState(false);
   const [user, setUser] = useState({
-    username:"",
-    email:"",
-    phone:""
+    username: "",
+    email: "",
+    phone: "",
   });
   const [backup, setBackup] = useState({});
 
   useEffect(() => {
     UserService.retriveUserInfor(id).then(
       (res) => {
-        console.log("there");
-        console.log(res.data.data);
         setUser(res.data.data);
-    
       },
       (err) => {
         alert(err.message);
       }
     );
     setEditable(false);
-
   }, [id]);
 
   function handleEdit() {
@@ -36,7 +32,7 @@ export default function InternInformation() {
     var { name, value } = e.target;
     setUser((preValue) => {
       return {
-          ...preValue,
+        ...preValue,
         [name]: value,
       };
     });
@@ -45,18 +41,19 @@ export default function InternInformation() {
     setEditable(false);
     setUser(backup);
   }
-  function handleUpdate(){
+  function handleUpdate() {
     setEditable(false);
-    console.log(user);
-    UserService.updateUser(id,user).then(()=>{
-        const currentUser=localStorage.getItem('user');
-        currentUser['username']=user.username;
-        console.log(currentUser);
-        localStorage.setItem('user',currentUser);
-    },err=>{
+    UserService.updateUser(id, user).then(
+      () => {
+        const currentUser = localStorage.getItem("user");
+        currentUser["username"] = user.username;
+        localStorage.setItem("user", currentUser);
+      },
+      (err) => {
         setUser(backup);
         alert(err.message);
-    })
+      }
+    );
   }
   return (
     <div>
@@ -95,7 +92,7 @@ export default function InternInformation() {
                   </div>
                 </div>
                 <hr /> */}
-                <div className="row" >
+                <div className="row">
                   <div className="col-sm-3">
                     <p className="mb-0">Phone Number</p>
                   </div>
@@ -105,7 +102,6 @@ export default function InternInformation() {
                       className="text-muted mb-0 edit-field"
                       name="phone"
                       onChange={handleInput}
-                  
                       value={user.phone}
                       placeholder="your phone number"
                       disabled={!editable}
@@ -130,17 +126,18 @@ export default function InternInformation() {
                   </div>
                 </div>
                 <hr />
-         
-                    <div className="row btnField d-flex justify-content-center" style={{display: editable && 'inline-block'}}>
-                        <EditButton
-                        editable={editable}
-                        handleUpdate={handleUpdate}
-                        handleEdit={handleEdit}
-                        handleCancel={handleCancel}
-                        />
-                    </div>
-       
-               
+
+                <div
+                  className="row btnField d-flex justify-content-center"
+                  style={{ display: editable && "inline-block" }}
+                >
+                  <EditButton
+                    editable={editable}
+                    handleUpdate={handleUpdate}
+                    handleEdit={handleEdit}
+                    handleCancel={handleCancel}
+                  />
+                </div>
               </div>
             </div>
           </div>

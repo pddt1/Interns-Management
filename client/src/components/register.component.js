@@ -47,7 +47,6 @@ export default function Register() {
             }
           })
           AuthService.register(formState.username,formState.password,formState.email,formState.password).then(res=>{
-            console.log(res);
             setFormState(preState=>{
               return {
                 ...preState,
@@ -56,7 +55,6 @@ export default function Register() {
               }
             })
           },err=>{
-            console.log(err);
             setFormState(preState=>{
               return {
                 ...preState,

@@ -95,7 +95,6 @@ exports.retriveIntern=(req,res)=>{
             res.status(500).send({ message: err });
             return;
         }
-        // console.log(result);
         if(!result){
             res.status(404).send({ message: "Intern was not in database" });
             return;
@@ -138,7 +137,6 @@ exports.updateIntern=(req,res)=>{
 exports.updateUser=(req,res)=>{
     const id = mongoose.Types.ObjectId(_.capitalize(req.params.id));
     const data=req.body;
-    console.log(data);
     User.findOneAndUpdate({_id:id},data).then((result)=>{
         res.status(200).send({message: "Updated successfully",data: result});
     },err=>{

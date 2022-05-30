@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 function Intern(props) {
   let navigate = useNavigate();
   function deleteIntern(e) {
-    console.log(props.id);
     props.onDelete(props.id);
     e.stopPropagation();
   }
@@ -35,7 +34,11 @@ function Intern(props) {
                 Status: {props.result === true ? "Passed" : "Failed"}
               </p>
               <div className="button-intern">
-                <button onClick={deleteIntern} type="button" className="btn btn-danger btn-sm">
+                <button
+                  onClick={deleteIntern}
+                  type="button"
+                  className="btn btn-danger btn-sm"
+                >
                   Delete
                 </button>
                 {/* <button type="button"> Edit</button> */}
